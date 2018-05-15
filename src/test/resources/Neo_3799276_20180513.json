@@ -1,0 +1,109 @@
+{
+    "links" : {
+      "self" : "https://api.nasa.gov/neo/rest/v1/neo/3799276?api_key=DEMO_KEY"
+    },
+    "neo_reference_id" : "3799276",
+    "name" : "(2018 CJ2)",
+    "nasa_jpl_url" : "http://ssd.jpl.nasa.gov/sbdb.cgi?sstr=3799276",
+    "absolute_magnitude_h" : 25.0,
+    "estimated_diameter" : {
+      "kilometers" : {
+        "estimated_diameter_min" : 0.02658,
+        "estimated_diameter_max" : 0.0594346868
+      },
+      "meters" : {
+        "estimated_diameter_min" : 26.58,
+        "estimated_diameter_max" : 59.4346868419
+      },
+      "miles" : {
+        "estimated_diameter_min" : 0.0165160412,
+        "estimated_diameter_max" : 0.0369309908
+      },
+      "feet" : {
+        "estimated_diameter_min" : 87.2047272,
+        "estimated_diameter_max" : 194.9956979785
+      }
+    },
+    "is_potentially_hazardous_asteroid" : false,
+    "close_approach_data" : [ {
+      "close_approach_date" : "2017-08-24",
+      "epoch_date_close_approach" : 1503558000000,
+      "relative_velocity" : {
+        "kilometers_per_second" : "13.8274651248",
+        "kilometers_per_hour" : "49778.8744493948",
+        "miles_per_hour" : "30930.6567377365"
+      },
+      "miss_distance" : {
+        "astronomical" : "0.3148487102",
+        "lunar" : "122.4761505127",
+        "kilometers" : "47100700",
+        "miles" : "29267018"
+      },
+      "orbiting_body" : "Earth"
+    }, {
+      "close_approach_date" : "2018-02-05",
+      "epoch_date_close_approach" : 1517817600000,
+      "relative_velocity" : {
+        "kilometers_per_second" : "15.4691708908",
+        "kilometers_per_hour" : "55689.0152068627",
+        "miles_per_hour" : "34602.9883656198"
+      },
+      "miss_distance" : {
+        "astronomical" : "0.0200935658",
+        "lunar" : "7.8163971901",
+        "kilometers" : "3005954.75",
+        "miles" : "1867813.625"
+      },
+      "orbiting_body" : "Earth"
+    }, {
+      "close_approach_date" : "2024-09-03",
+      "epoch_date_close_approach" : 1725346800000,
+      "relative_velocity" : {
+        "kilometers_per_second" : "19.8167019476",
+        "kilometers_per_hour" : "71340.1270115108",
+        "miles_per_hour" : "44327.9805866802"
+      },
+      "miss_distance" : {
+        "astronomical" : "0.4991403416",
+        "lunar" : "194.1656036377",
+        "kilometers" : "74670336",
+        "miles" : "46397996"
+      },
+      "orbiting_body" : "Earth"
+    }, {
+      "close_approach_date" : "2103-04-13",
+      "epoch_date_close_approach" : 4205890800000,
+      "relative_velocity" : {
+        "kilometers_per_second" : "12.4603109492",
+        "kilometers_per_hour" : "44857.1194171844",
+        "miles_per_hour" : "27872.4695623055"
+      },
+      "miss_distance" : {
+        "astronomical" : "0.0705310373",
+        "lunar" : "27.4365749359",
+        "kilometers" : "10551294",
+        "miles" : "6556270"
+      },
+      "orbiting_body" : "Mars"
+    } ],
+    "orbital_data" : {
+      "orbit_id" : "1",
+      "orbit_determination_date" : "2018-02-10 12:42:05",
+      "orbit_uncertainty" : "7",
+      "minimum_orbit_intersection" : ".0184323",
+      "jupiter_tisserand_invariant" : "5.039",
+      "epoch_osculation" : "2458200.5",
+      "eccentricity" : ".2500467869508559",
+      "semi_major_axis" : "1.240180306977237",
+      "inclination" : "26.82725857430444",
+      "ascending_node_longitude" : "137.1929895713756",
+      "orbital_period" : "504.4587659211199",
+      "perihelion_distance" : ".9300772059778533",
+      "perihelion_argument" : "308.4890462388371",
+      "aphelion_distance" : "1.550283407976622",
+      "perihelion_time" : "2458112.017941991483",
+      "mean_anomaly" : "63.14399319615957",
+      "mean_motion" : ".7136361271126997",
+      "equinox" : "J2000"
+    }
+  }
