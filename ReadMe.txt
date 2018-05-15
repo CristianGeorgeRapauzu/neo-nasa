@@ -16,6 +16,14 @@ Build and run:
 ./mvnw clean package
 java -jar target/neonasa-0.0.1-SNAPSHOT.jar
 
+The above command line (without args) uses a decent default: "startpage=910"
+
+java -jar target/neonasa-0.0.1-SNAPSHOT.jar -startpage=900
+
+To glean information from the whole NEO set, start browsing from page 1 up to 935 (or even more):
+
+java -jar target/neonasa-0.0.1-SNAPSHOT.jar -startpage=1
+
 
 References
 ----------
@@ -58,4 +66,3 @@ H<=22.0
 Potentially Hazardous Asteroids: 
 NEAs whose Minimum Orbit Intersection Distance (MOID) with the Earth is 0.05 au or less
 and whose absolute magnitude (H) is 22.0 or brighter.
--------------------------
