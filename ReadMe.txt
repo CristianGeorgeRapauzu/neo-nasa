@@ -9,8 +9,6 @@ Solution
 --------
 A command line application which traces only the last 20 pages (instead of the grand total of 935).
 
-Unpack neonasa.tar.gz
-
 Build and run:
 
 ./mvnw clean package
