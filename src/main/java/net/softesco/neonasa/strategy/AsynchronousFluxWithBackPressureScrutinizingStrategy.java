@@ -24,7 +24,7 @@ public class AsynchronousFluxWithBackPressureScrutinizingStrategy implements Scr
 	 * @see https://api.nasa.gov/neo/rest/v1/neo/browse?page=0&size=20&api_key=DEMO_KEY
 	 * @param neoSummary in/out summary of number, greatest, nearest NEO today, plus paging
 	 * @param firstPageNumber used to limit the scrutinizing range;
-	 *        default=1 means more than 935 pages will be requested
+	 *        using arg[0]: -startpage=1 (firstPageNumber=1) means more than 935 pages will be requested
 	 */
 	@Override
 	public void obtainNeoInfoFromBrowsedPages(NeoSummary neoSummary, int firstPageNumber) {
