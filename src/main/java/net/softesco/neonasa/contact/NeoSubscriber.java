@@ -1,5 +1,6 @@
 package net.softesco.neonasa.contact;
 
+import net.softesco.neonasa.convert.Page;
 import net.softesco.neonasa.convert.PaginatedNeo;
 
 import org.reactivestreams.Subscription;
@@ -28,9 +29,16 @@ public class NeoSubscriber<T> extends BaseSubscriber<T> {
 
 	@Override
 	public void hookOnNext(T value) {
-		if( value instanceof PaginatedNeo) {
+		if (value == null) {
+			logger.debug("PaginatedNeo: null ?!?");
+		} else if( value instanceof PaginatedNeo) {
 			PaginatedNeo paginatedNeo = (PaginatedNeo) value;
-			logger.debug("Page: " + paginatedNeo.getPage().getNumber() + "/" + paginatedNeo.getPage().getTotalPages());
+			final Page page = paginatedNeo.getPage();
+			if (page == null) {
+				logger.debug("Page: null ?!?");
+			} else {
+				logger.debug("Page: " + page.getNumber() + "/" + page.getTotalPages());
+			}
 		} else {
 			logger.debug(value.toString());			
 		}
