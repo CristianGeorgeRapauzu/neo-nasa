@@ -7,20 +7,32 @@ Output the total number of NEOs, and the details retrieved for both the largest 
 
 Solution
 --------
-A command line application which traces only the last 20 pages (instead of the grand total of 935).
+A command line application which traces by default only the last 20 pages (instead of the grand total of 935), 
+or starts scanning from the specified start page of NEOs.
 
 Build and run:
 
-./mvnw clean package
-java -jar target/neonasa-0.0.1-SNAPSHOT.jar
+$ ./mvnw clean package
 
-The above command line (without args) uses a decent default: "startpage=910"
+Using default start page 910:
+$ java -jar target/neonasa-0.0.1-SNAPSHOT.jar
 
-java -jar target/neonasa-0.0.1-SNAPSHOT.jar -startpage=900
+Using explicit start page 901:
+$ java -jar target/neonasa-0.0.1-SNAPSHOT.jar -startpage=901
 
 To glean information from the whole NEO set, start browsing from page 1 up to 935 (or even more):
 
-java -jar target/neonasa-0.0.1-SNAPSHOT.jar -startpage=1
+$ java -jar target/neonasa-0.0.1-SNAPSHOT.jar -startpage=1
+
+View the persisted summary:
+
+$ cat /tmp/neonasa/neo.summary
+
+NeoSummary(neoCount=18791, lastUpdated=2018-05-23, totalPages=939, currentPage=921, 
+maxAbsoluteMagnitudeH=34.282, 
+minMissDistance=0.0037861112, 
+nearestNeo=Neo(neoReferenceId=3797848, name=(2018 BA3), potentiallyHazardousAsteroid=false, absoluteMagnitudeH=26.3), 
+greatestNeo=Neo(neoReferenceId=3799865, name=(2018 DM4), potentiallyHazardousAsteroid=false, absoluteMagnitudeH=34.282))
 
 
 References
@@ -64,3 +76,4 @@ H<=22.0
 Potentially Hazardous Asteroids: 
 NEAs whose Minimum Orbit Intersection Distance (MOID) with the Earth is 0.05 au or less
 and whose absolute magnitude (H) is 22.0 or brighter.
+-------------------------
