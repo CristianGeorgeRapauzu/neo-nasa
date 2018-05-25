@@ -23,11 +23,11 @@ import org.slf4j.LoggerFactory;
  * Summary of number, greatest, nearest NEO today, plus paging
  * @author cristi
  */
-@ToString(exclude="neoSummaryChannel")
+@ToString(exclude={"neoSummaryPath","neoSummaryChannel"})
 public class NeoSummary {
 
-	private static String NEO_SUMMARY_PATH = "/tmp/neonasa";
-	private static String NEO_SUMMARY_FILENAME = "neo.summary";
+	public static String NEO_SUMMARY_PATH = "/tmp/neonasa";
+	public static String NEO_SUMMARY_FILENAME = "neo.summary";
 	
 	private static Logger logger = LoggerFactory.getLogger(NeoSummary.class);
 
@@ -58,12 +58,15 @@ public class NeoSummary {
 	private Neo greatestNeo;
 	
 	@Getter
+	private Path neoSummaryPath;
+	
+	@Getter
 	private SeekableByteChannel neoSummaryChannel;
 	
 	public NeoSummary() {
 		try {
-			Path neoSummaryPath = Files.createDirectories(Paths.get(NEO_SUMMARY_PATH)).resolve(NEO_SUMMARY_FILENAME);
-			this.neoSummaryChannel = Files.newByteChannel(neoSummaryPath, EnumSet.of(StandardOpenOption.CREATE, StandardOpenOption.READ, StandardOpenOption.WRITE));
+			this.neoSummaryPath = Files.createDirectories(Paths.get(NEO_SUMMARY_PATH)).resolve(NEO_SUMMARY_FILENAME);
+			this.neoSummaryChannel = Files.newByteChannel(this.neoSummaryPath, EnumSet.of(StandardOpenOption.CREATE, StandardOpenOption.READ, StandardOpenOption.WRITE));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
