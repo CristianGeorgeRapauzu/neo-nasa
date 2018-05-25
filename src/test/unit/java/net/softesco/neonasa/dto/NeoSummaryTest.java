@@ -16,12 +16,17 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 public class NeoSummaryTest {
-	
+	// see integration test CentralScrutinizerTest for Autowired neoSummary testing
 	private NeoSummary neoSummary;
 	
 	@Before
 	public void setUp() {
 		neoSummary = new NeoSummary();
+	}
+	
+	@Test
+	public void getNeoSummaryPath() {
+		assertThat(neoSummary.getNeoSummaryPath().endsWith(NeoSummary.NEO_SUMMARY_FILENAME)).isTrue();		
 	}
 	
 	@Test
