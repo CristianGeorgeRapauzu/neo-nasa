@@ -13,6 +13,7 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import net.softesco.neonasa.NeoException;
 import net.softesco.neonasa.convert.Neo;
 import net.softesco.neonasa.convert.Page;
 
@@ -155,8 +156,59 @@ public class NeoSummary {
 			this.neoSummaryChannel.position(0);
 			this.neoSummaryChannel.write(neoSummaryByteBuffer);
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.warn("Error persisting NEO summary");
+			new NeoException(e);
 		}
 	}
 
+	/**
+	 * Read current NEO summary
+	 * @return neoSummaryByteBuffer
+	 * @throws NeoException 
+	 */
+	public ByteBuffer snapshot() throws NeoException {
+		ByteBuffer neoSummaryByteBuffer = null;
+		try {
+			int neoSummarySize = (int) this.neoSummaryChannel.size();
+			byte[] neoSummaryBytes = new byte[neoSummarySize];
+			neoSummaryByteBuffer = ByteBuffer.wrap(neoSummaryBytes);
+
+			this.neoSummaryChannel.position(0);
+			this.neoSummaryChannel.read(neoSummaryByteBuffer);
+		} catch (IOException e) {
+			logger.warn("Error reading NEO summary");
+			throw new NeoException(e);
+		}
+		return neoSummaryByteBuffer;
+	}
+	
+	public String snapshotAsString() throws NeoException {
+		/* Note: This returned empty, as snapshot().asCharBuffer().length() is 0:
+		 return new StringBuilder(snapshot().asCharBuffer()).toString();
+		 */
+		StringBuilder stringBuilder = new StringBuilder();
+		
+		byte[] neoSummaryBytes = snapshot().array();
+		for (int i = 0; i < neoSummaryBytes.length; i++) {
+			final char c = (char)neoSummaryBytes[i];
+			stringBuilder.append(c);
+			if (c==',') {
+				stringBuilder.append("\n");
+			}
+		}
+		
+		return stringBuilder.toString();
+	}
+	
+	public void close() throws NeoException {
+		if(this.neoSummaryChannel.isOpen()) {
+			try {
+				this.neoSummaryChannel.close();
+			} catch (IOException e) {
+				logger.warn("Error closing neoSummaryChannel");
+				throw new NeoException(e);
+			}
+		}
+	}
+	
 }
