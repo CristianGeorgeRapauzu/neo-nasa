@@ -39,7 +39,6 @@ public class GeneratorUtility {
 
 	public static List<Neo> buildListNeo() throws JsonParseException, JsonMappingException, IOException {
 		PaginatedNeo paginatedNeo = buildPaginatedNeo();
-		System.out.println(paginatedNeo);
 		return paginatedNeo.getNeos();
 	}
 
