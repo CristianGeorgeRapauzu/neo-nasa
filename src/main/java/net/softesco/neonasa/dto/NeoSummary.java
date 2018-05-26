@@ -182,6 +182,11 @@ public class NeoSummary {
 		return neoSummaryByteBuffer;
 	}
 	
+	/**
+	 * Somewhat-pretty printing of NEO summary read from file /tmp/neonasa/neo.summary
+	 * @return NEO summary snapshot string
+	 * @throws NeoException
+	 */
 	public String snapshotAsString() throws NeoException {
 		/* Note: This returned empty, as snapshot().asCharBuffer().length() is 0:
 		 return new StringBuilder(snapshot().asCharBuffer()).toString();

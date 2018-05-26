@@ -16,6 +16,14 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Watch directory with neo.summary used for persistence
+ * in order to decide when all asynchronous processing has actually ended and
+ * print the stabilized NEO summary.
+ * 
+ * @author cristi
+ * @see: https://docs.oracle.com/javase/tutorial/essential/io/examples/WatchDir.java
+ */
 public class PersistenceDirWatcherService {
 
 	private static Logger logger = LoggerFactory.getLogger(PersistenceDirWatcherService.class);
@@ -49,7 +57,7 @@ public class PersistenceDirWatcherService {
     public void loopWatchingEvents() {
         for (;;) {
 
-            // wait for key to be signalled
+            // wait for key to be signaled
             WatchKey watchKey;
             try {
             	watchKey = watchService.poll(3, TimeUnit.SECONDS);
