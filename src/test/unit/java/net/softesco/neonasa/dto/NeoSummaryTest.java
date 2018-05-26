@@ -5,10 +5,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.io.IOException;
 import java.util.List;
 
+import net.softesco.neonasa.NeoException;
 import net.softesco.neonasa.convert.GeneratorUtility;
 import net.softesco.neonasa.convert.Neo;
 import net.softesco.neonasa.convert.Page;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,11 +26,24 @@ public class NeoSummaryTest {
 		neoSummary = new NeoSummary();
 	}
 	
+	@After
+	public void tearDown() throws NeoException {
+		neoSummary.close();
+	}
+	
 	@Test
 	public void getNeoSummaryPath() {
 		// /tmp/neonasa/neo.summary
 		assertThat(neoSummary.getNeoSummaryPath().endsWith(NeoSummary.NEO_SUMMARY_FILENAME)).isTrue();	
 		assertThat(neoSummary.getNeoSummaryPath().getParent().endsWith(NeoSummary.NEO_SUMMARY_PATH)).isTrue();
+	}
+	
+	@Test
+	public void snapshotAsString() throws NeoException {
+		final String snapshotAsString = neoSummary.snapshotAsString();
+		System.out.println("NEO summary snapshot: " + snapshotAsString);
+		assertThat(snapshotAsString).isNotNull();
+		assertThat(snapshotAsString.startsWith("NeoSummary")).isTrue();
 	}
 	
 	@Test
