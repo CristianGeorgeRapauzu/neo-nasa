@@ -26,7 +26,9 @@ public class NeoSummaryTest {
 	
 	@Test
 	public void getNeoSummaryPath() {
-		assertThat(neoSummary.getNeoSummaryPath().endsWith(NeoSummary.NEO_SUMMARY_FILENAME)).isTrue();		
+		// /tmp/neonasa/neo.summary
+		assertThat(neoSummary.getNeoSummaryPath().endsWith(NeoSummary.NEO_SUMMARY_FILENAME)).isTrue();	
+		assertThat(neoSummary.getNeoSummaryPath().getParent().endsWith(NeoSummary.NEO_SUMMARY_PATH)).isTrue();
 	}
 	
 	@Test
