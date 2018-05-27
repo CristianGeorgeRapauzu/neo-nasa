@@ -35,6 +35,22 @@ nearestNeo=Neo(neoReferenceId=3797848, name=(2018 BA3), potentiallyHazardousAste
 greatestNeo=Neo(neoReferenceId=3799865, name=(2018 DM4), potentiallyHazardousAsteroid=false, absoluteMagnitudeH=34.282))
 
 
+Maven
+-----
+
+Only Unit Tests:
+./mvnw test
+
+./mvnw -Dtest=NeoSummaryTest test
+./mvnw -Dtest=NeoTest#getCloseApproacheDataFirstMissDistanceAstronomical test
+
+Unit Tests AND Integration Tests:
+./mvnw verify
+
+longer alternative:
+./mvnw integration-test
+
+
 References
 ----------
 
@@ -76,4 +92,3 @@ H<=22.0
 Potentially Hazardous Asteroids: 
 NEAs whose Minimum Orbit Intersection Distance (MOID) with the Earth is 0.05 au or less
 and whose absolute magnitude (H) is 22.0 or brighter.
--------------------------

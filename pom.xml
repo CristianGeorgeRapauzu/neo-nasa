@@ -54,9 +54,44 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+	        <plugin>
+		        <groupId>org.codehaus.mojo</groupId>
+		        <artifactId>build-helper-maven-plugin</artifactId>
+		        <executions>
+		          <execution>
+		            <id>add-integration-test-source</id>
+		            <phase>generate-test-sources</phase>
+		            <goals>
+		              <goal>add-test-source</goal>
+		            </goals>
+		            <configuration>
+		              <sources>
+		                <source>${basedir}/src/test/integration/java</source>
+		              </sources>
+		            </configuration>
+		          </execution>
+		        </executions>
+	        </plugin>
+	       	<plugin>
+	            <!-- run the integration tests -->
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-failsafe-plugin</artifactId>
+		        <configuration>
+		          <includes>
+		            <include>**/*IT.java</include> <!-- reminder: one of default values -->
+		          </includes>
+		        </configuration>	            
+	            <executions>
+	                <execution>
+	                    <goals>
+	                        <goal>integration-test</goal>
+	                        <goal>verify</goal>
+	                    </goals>
+	                </execution>
+	            </executions>
+	        </plugin>			
 		</plugins>
 		<testSourceDirectory>${basedir}/src/test/unit/java</testSourceDirectory>
 	</build>
-
 
 </project>
