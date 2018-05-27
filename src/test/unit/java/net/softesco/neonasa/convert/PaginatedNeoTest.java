@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SeekableByteChannel;
 
+import net.softesco.neonasa.NeoException;
 import net.softesco.neonasa.dto.NeoSummary;
 
 import org.junit.Before;
@@ -24,7 +25,7 @@ public class PaginatedNeoTest {
 	}
 
 	@Test
-	public void persistNeoSummary() throws IOException {
+	public void persistNeoSummary() throws IOException, NeoException {
 		assertThat(paginatedNeo).isNotNull();
 		NeoSummary neoSummary = new NeoSummary();
 		paginatedNeo.processPage(neoSummary);
