@@ -39,6 +39,11 @@ public class PersistenceDirWatcherService {
 		this.watched = true;
 	}
 
+	/**
+	 * Register path to watch for persistence file updates 
+	 * @param watchedPath /tmp/neonasa
+	 * @throws IOException
+	 */
     private void register(Path watchedPath) throws IOException {
         WatchKey key = watchedPath.register(watchService, ENTRY_MODIFY);
         if (watched) {
@@ -54,9 +59,12 @@ public class PersistenceDirWatcherService {
         watchKeyPathMap.put(key, watchedPath);
     }
 
+    /**
+     * Keep waiting (within a reasonable timeout limit) for a key signaling 
+     * the modification of the persistence: /tmp/neonasa/neo.summary
+     */
     public void loopWatchingEvents() {
         for (;;) {
-
             // wait for key to be signaled
             WatchKey watchKey;
             try {

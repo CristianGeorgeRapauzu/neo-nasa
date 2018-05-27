@@ -54,7 +54,6 @@ public class NeoSummary {
 	private Neo nearestNeo;
 
 	// determined by absolute_magnitude_h
-	// alternative: by estimated_diameter.kilometers.estimated_diameter_max
 	@Setter @Getter
 	private Neo greatestNeo;
 	
@@ -64,13 +63,13 @@ public class NeoSummary {
 	@Getter
 	private SeekableByteChannel neoSummaryChannel;
 	
-	public NeoSummary() {
+	public NeoSummary() throws NeoException {
 		try {
 			this.neoSummaryPath = Files.createDirectories(Paths.get(NEO_SUMMARY_PATH)).resolve(NEO_SUMMARY_FILENAME);
 			this.neoSummaryChannel = Files.newByteChannel(this.neoSummaryPath, EnumSet.of(StandardOpenOption.CREATE, StandardOpenOption.READ, StandardOpenOption.WRITE));
 		} catch (IOException e) {
 			logger.warn("Error creating file for persisting NEO summary");
-			new NeoException(e);
+			throw new NeoException(e);
 		}
 	}
 	
@@ -92,8 +91,9 @@ public class NeoSummary {
 	 * and the corresponding NEO (nearestNeo).
 	 * 
 	 * @param neoListPerPage list of NEOs in current page (default 20 per page)
+	 * @throws NeoException which wraps IOException 
 	 */
-	public void updateDistanceInfo(final List<Neo> neoListPerPage) {
+	public void updateDistanceInfo(final List<Neo> neoListPerPage) throws NeoException {
 		Double minMissDistance = neoListPerPage.stream()
 												 .mapToDouble(Neo::getCloseApproacheDataFirstMissDistanceAstronomical)
 												 .min()
@@ -117,8 +117,9 @@ public class NeoSummary {
 	 * and the corresponding NEO (greatestNeo).
 	 * 
 	 * @param neoListPerPage list of NEOs in current page (default 20 per page)
+	 * @throws NeoException which wraps IOException
 	 */
-	public void updateSizeInfo(final List<Neo> neoListPerPage) {
+	public void updateSizeInfo(final List<Neo> neoListPerPage) throws NeoException {
 		Double maxAbsoluteMagnitudeH = neoListPerPage.stream()
 													 .mapToDouble(Neo::getAbsoluteMagnitudeH)
 													 .max()
@@ -147,8 +148,9 @@ public class NeoSummary {
 	 * 			minMissDistance=0.0390178586, 
 	 * 			nearestNeo=Neo(neoReferenceId=3799717, name=(2018 DE1), potentiallyHazardousAsteroid=false, absoluteMagnitudeH=25.5), 
 	 * 			greatestNeo=Neo(neoReferenceId=3802056, name=(2018 FQ3), potentiallyHazardousAsteroid=false, absoluteMagnitudeH=28.6))
+	 * @throws NeoException which wraps IOException
 	*/
-	private void persist() {
+	private void persist() throws NeoException {
 		try {
 			byte[] neoSummaryBytes = this.toString().getBytes();
 			ByteBuffer neoSummaryByteBuffer = ByteBuffer.wrap(neoSummaryBytes);
@@ -158,14 +160,14 @@ public class NeoSummary {
 			this.neoSummaryChannel.write(neoSummaryByteBuffer);
 		} catch (IOException e) {
 			logger.warn("Error persisting NEO summary");
-			new NeoException(e);
+			throw new NeoException(e);
 		}
 	}
 
 	/**
 	 * Read current NEO summary
 	 * @return neoSummaryByteBuffer
-	 * @throws NeoException 
+	 * @throws NeoException which wraps IOException
 	 */
 	public ByteBuffer snapshot() throws NeoException {
 		ByteBuffer neoSummaryByteBuffer = null;
@@ -186,7 +188,7 @@ public class NeoSummary {
 	/**
 	 * Somewhat-pretty printing of NEO summary read from file /tmp/neonasa/neo.summary
 	 * @return NEO summary snapshot string
-	 * @throws NeoException
+	 * @throws NeoException which wraps IOException
 	 */
 	public String snapshotAsString() throws NeoException {
 		/* Note: This returned empty, as snapshot().asCharBuffer().length() is 0:
