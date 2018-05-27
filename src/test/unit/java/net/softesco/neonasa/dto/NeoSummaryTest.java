@@ -22,7 +22,7 @@ public class NeoSummaryTest {
 	private NeoSummary neoSummary;
 	
 	@Before
-	public void setUp() {
+	public void setUp() throws NeoException {
 		neoSummary = new NeoSummary();
 	}
 	
@@ -55,7 +55,7 @@ public class NeoSummaryTest {
 	}
 
 	@Test
-	public void updateDistanceInfo() throws JsonParseException, JsonMappingException, IOException {
+	public void updateDistanceInfo() throws JsonParseException, JsonMappingException, IOException, NeoException {
 		List<Neo> neoListPerPage = GeneratorUtility.buildListNeo();
 		assertThat(neoListPerPage).isNotNull();
 		assertThat(neoListPerPage.size()).isEqualTo(20);
@@ -66,7 +66,7 @@ public class NeoSummaryTest {
 	}
 
 	@Test
-	public void updateSizeInfo() throws JsonParseException, JsonMappingException, IOException {
+	public void updateSizeInfo() throws JsonParseException, JsonMappingException, IOException, NeoException {
 		List<Neo> neoListPerPage = GeneratorUtility.buildListNeo();
 		neoSummary.updateSizeInfo(neoListPerPage);
 		assertThat(neoSummary.getMaxAbsoluteMagnitudeH()).isEqualTo(GeneratorUtility.MAX_ABSOLUTE_MAGNITUDE_H_PER_PAGE);
