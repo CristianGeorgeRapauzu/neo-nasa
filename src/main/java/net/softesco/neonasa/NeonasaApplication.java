@@ -69,7 +69,8 @@ public class NeonasaApplication {
 			persistenceDirWatcherService.loopWatchingEvents();
 			logger.info("\nNEO summary snapshot: \n" + centralScrutinizer.getNeoSummary().snapshotAsString());
 			centralScrutinizer.getNeoSummary().close();
-			System.exit(0);
+			// Surefire does not support tests or any referenced libraries calling System.exit() at any time. 
+			//System.exit(0);
 		};
 	}
 
