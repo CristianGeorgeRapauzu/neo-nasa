@@ -43,7 +43,7 @@ public class NeonasaApplication {
 	}
 
 	@Bean
-	NeoSummary neoSummary() {
+	NeoSummary neoSummary() throws NeoException {
 		return new NeoSummary();
 	}
 
