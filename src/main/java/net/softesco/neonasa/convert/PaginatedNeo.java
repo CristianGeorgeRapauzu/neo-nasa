@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import net.softesco.neonasa.NeoException;
 import net.softesco.neonasa.dto.NeoSummary;
 import lombok.Getter;
 import lombok.Setter;
@@ -167,8 +168,12 @@ public class PaginatedNeo {
 		neoSummary.updatePageInfo(page);
 
 		final List<Neo> neoListPerPage = getNeos();
-		neoSummary.updateSizeInfo(neoListPerPage);
-		neoSummary.updateDistanceInfo(neoListPerPage);
+		try {
+			neoSummary.updateSizeInfo(neoListPerPage);
+			neoSummary.updateDistanceInfo(neoListPerPage);
+		} catch (NeoException e) {
+			logger.error("Error updating NEO summary", e.getLocalizedMessage());
+		}
 	}
 
 }
