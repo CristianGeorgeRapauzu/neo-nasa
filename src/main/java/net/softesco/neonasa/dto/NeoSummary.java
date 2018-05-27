@@ -69,7 +69,8 @@ public class NeoSummary {
 			this.neoSummaryPath = Files.createDirectories(Paths.get(NEO_SUMMARY_PATH)).resolve(NEO_SUMMARY_FILENAME);
 			this.neoSummaryChannel = Files.newByteChannel(this.neoSummaryPath, EnumSet.of(StandardOpenOption.CREATE, StandardOpenOption.READ, StandardOpenOption.WRITE));
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.warn("Error creating file for persisting NEO summary");
+			new NeoException(e);
 		}
 	}
 	
@@ -206,7 +207,7 @@ public class NeoSummary {
 	}
 	
 	public void close() throws NeoException {
-		if(this.neoSummaryChannel.isOpen()) {
+		if((this.neoSummaryChannel!= null) && this.neoSummaryChannel.isOpen()) {
 			try {
 				this.neoSummaryChannel.close();
 			} catch (IOException e) {
