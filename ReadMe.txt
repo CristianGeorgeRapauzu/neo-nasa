@@ -7,11 +7,12 @@ Output the total number of NEOs, and the details retrieved for both the largest 
 
 Solution
 --------
-A command line application which traces by default only the last 20 pages (instead of the grand total of 935), 
+A command line application using SpringBoot which traces by default only the last 25 pages (instead of the grand total of 935), 
 or starts scanning from the specified start page of NEOs.
+Uses a Strategy (a/synchronous, loop/flux, with/out back-pressure) to scrutinize responses and persist NEO summary in /tmp/neonasa/neo.summary.
+The directory is watched for modifications with a timeout. After the timeout the stable NEO summary is echoed.
 
 Build and run:
-
 $ ./mvnw clean package
 
 Using default start page 910:
@@ -21,11 +22,9 @@ Using explicit start page 901:
 $ java -jar target/neonasa-0.0.1-SNAPSHOT.jar -startpage=901
 
 To glean information from the whole NEO set, start browsing from page 1 up to 935 (or even more):
-
 $ java -jar target/neonasa-0.0.1-SNAPSHOT.jar -startpage=1
 
 View the persisted summary:
-
 $ cat /tmp/neonasa/neo.summary
 
 NeoSummary(neoCount=18791, lastUpdated=2018-05-23, totalPages=939, currentPage=921, 
@@ -35,16 +34,15 @@ nearestNeo=Neo(neoReferenceId=3797848, name=(2018 BA3), potentiallyHazardousAste
 greatestNeo=Neo(neoReferenceId=3799865, name=(2018 DM4), potentiallyHazardousAsteroid=false, absoluteMagnitudeH=34.282))
 
 
-Maven
------
-
-Only Unit Tests:
+Testing
+-------
+To run only Unit Tests:
 ./mvnw test
 
 ./mvnw -Dtest=NeoSummaryTest test
 ./mvnw -Dtest=NeoTest#getCloseApproacheDataFirstMissDistanceAstronomical test
 
-Unit Tests AND Integration Tests:
+To run Unit Tests AND Integration Tests:
 ./mvnw verify
 
 longer alternative:
@@ -53,7 +51,6 @@ longer alternative:
 
 References
 ----------
-
 https://api.nasa.gov/api.html#neows-swagger
 
 http://spring.io/guides/gs/reactive-rest-service/
