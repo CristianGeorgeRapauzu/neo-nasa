@@ -7,8 +7,7 @@ Output the total number of NEOs, and the details retrieved for both the largest 
 
 Solution
 --------
-A command line application using SpringBoot which traces by default only the last 25 pages (instead of the grand total of 935), 
-or starts scanning from the specified start page of NEOs.
+A command line application using SpringBoot which traces by default only the last 25 pages (instead of the grand total of 935),  or starts scanning from the specified start page of NEOs.
 Uses a Strategy (a/synchronous, loop/flux, with/out back-pressure) to scrutinize responses and persist NEO summary in /tmp/neonasa/neo.summary.
 The directory is watched for modifications with a timeout. After the timeout the stable NEO summary is echoed.
 
@@ -33,7 +32,6 @@ minMissDistance=0.0037861112,
 nearestNeo=Neo(neoReferenceId=3797848, name=(2018 BA3), potentiallyHazardousAsteroid=false, absoluteMagnitudeH=26.3), 
 greatestNeo=Neo(neoReferenceId=3799865, name=(2018 DM4), potentiallyHazardousAsteroid=false, absoluteMagnitudeH=34.282))
 
-
 Testing
 -------
 To run only Unit Tests:
@@ -47,7 +45,6 @@ To run Unit Tests AND Integration Tests:
 
 longer alternative:
 ./mvnw integration-test
-
 
 References
 ----------
